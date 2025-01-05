@@ -1,0 +1,5 @@
+config BR2_PACKAGE_LDD
+    bool "ldd"
+    depends on BR2_LINUX_KERNEL
+    help
+      LDD repo needed for misc-modules and scull drivers for support in the root filesystem.

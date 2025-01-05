@@ -1,0 +1,31 @@
+#!/bin/sh
+
+case "$1" in
+	start)
+		echo "S98Modules start"
+		cp /usr/bin/scull_* /lib/modules/$(uname -r)/extra
+		cp /usr/bin/module_* /lib/modules/$(uname -r)/extra
+		cd /lib/modules/$(uname -r)/extra
+		scull_load
+		echo "******"
+		module_load faulty
+		echo "******"
+		
+		modprobe hello
+		echo "******"
+		;;
+	stop)
+		echo "S98Modules stop"
+		cd /lib/modules/$(uname -r)/extra
+		scull_unload
+		module_unload faulty
+		rmmod hello
+		;;
+
+	*)
+		echo "Usage: $0 {start|stop}"
+	exit 1
+		;;
+esac
+
+exit 0
